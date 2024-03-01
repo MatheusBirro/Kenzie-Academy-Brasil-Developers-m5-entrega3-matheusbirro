@@ -1,5 +1,5 @@
 import { prisma } from "../database"
-import { CarCreate, CarReturn, CarUpdate } from "../interfaces"
+import { CarCreate, CarReturn,  CarUpdate } from "../interfaces"
 import { carReturnSchema } from "../schemas"
 
 export class carService {
@@ -14,7 +14,7 @@ export class carService {
 
     public read = async (carId?: string): Promise<CarReturn[] | CarReturn> =>{
         if (carId) {
-            const car = await prisma.car.findFirst({ where: {id: Number(carId)} });
+            const car = await prisma.car.findFirst({ where: {id: carId} });
             return carReturnSchema.parse(car);
         }
 
@@ -24,13 +24,13 @@ export class carService {
 
     public update = async (carId: string, payload: CarUpdate): Promise<CarReturn> =>{
         const car = await prisma.car.update({
-          data: payload,
-          where: { id: Number(carId) }
+          data: payload as any,
+          where: { id: carId }
         });
         return carReturnSchema.parse(car);
     }
 
     public delete = async ( carId: string): Promise<void> =>{
-        await prisma.car.delete({ where: {id: Number(carId)} });
+        await prisma.car.delete({ where: {id: carId} });
     }
 }

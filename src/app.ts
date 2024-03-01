@@ -1,3 +1,4 @@
+import "express-async-errors";
 import cors from "cors";
 import express, { Application, json } from "express";
 import helmet from "helmet";
