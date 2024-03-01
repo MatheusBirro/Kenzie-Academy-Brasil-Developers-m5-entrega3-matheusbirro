@@ -12,7 +12,7 @@ describe("Integration Tests: Delete Cars route.", () => {
     km: 10000,
   };
 
-  const invalidId = "762eff5f-9abd-44b4-9cb7-94e53eeb6bcd"
+  const invalidId = "762eff5f-9abd-44b4-9cb7-94e53eeb6bcd";
 
   beforeEach(async () => {
     await carTb.deleteMany();

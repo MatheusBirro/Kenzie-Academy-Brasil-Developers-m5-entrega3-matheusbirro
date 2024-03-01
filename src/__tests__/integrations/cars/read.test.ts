@@ -20,6 +20,8 @@ describe("Integration Tests: Read Cars route.", () => {
     km: 10000,
   };
 
+  const invalidId = "762eff5f-9abd-44b4-9cb7-94e53eeb6bcd";
+
   beforeAll(async () => {
     await carTb.deleteMany();
     await carTb.create({ data: carMock });
@@ -60,7 +62,6 @@ describe("Integration Tests: Read Cars route.", () => {
 
   test("Should be able to get a single task by the id correctly.", async () => {
     const res = await carTb.create({ data: fullCar });
-console.log(res.id);
 
     const response = await request.get(`${baseUrl}${res.id}`);
 
@@ -72,8 +73,17 @@ console.log(res.id);
       year: fullCar.year,
       km: fullCar.km,
     };
-    
+
     expect(response.body).toStrictEqual(expectedValue);
     expect(response.status).toBe(200);
+  });
+
+  test("Should throw error when car id is invalid.", async () => {
+    const response = await request.get(`${baseUrl}${invalidId}`);
+
+    const expectedValue = { message: "Car not found"}
+
+    expect(response.body).toStrictEqual(expectedValue);
+    expect(response.status).toBe(404);
   });
 });
