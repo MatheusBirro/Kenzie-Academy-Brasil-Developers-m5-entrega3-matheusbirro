@@ -1,3 +1,3 @@
-import { CarCreate, CarReturn, CarUpdate } from "./car.interface";
+import { Car, CarCreate, CarReturn, CarUpdate } from "./car.interface";
 
-export{CarCreate, CarUpdate, CarReturn}
+export{Car, CarCreate, CarUpdate, CarReturn}
